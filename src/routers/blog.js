@@ -64,6 +64,8 @@ router.get("/blog/:id", async (req, res) => {
 router.get("/blogsOfUser", authen, async (req, res) => {
     try {
         const blogs = await Blog.find({ owner: req.user._id }, null, {
+            limit: parseInt(req.query.limit),
+            skip: parseInt(req.query.skip),
             sort: {
                 createdAt: -1
             }
